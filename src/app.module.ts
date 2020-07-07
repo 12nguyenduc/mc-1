@@ -12,11 +12,15 @@ import { UploadController } from './upload/upload.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import {join} from "path";
 import { UploadModule } from './upload/upload.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development', '.env.production'],
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
